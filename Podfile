@@ -8,4 +8,5 @@ target 'MonKey' do
   # Pods for MonKey
   pod 'AccountKit'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'SwiftKeychainWrapper', '~> 3.0.1'
 end

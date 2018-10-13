@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220EE8CF21727ABC009E7C9E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EE8CE21727ABC009E7C9E /* MainViewController.swift */; };
+		220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EE8D0217281E9009E7C9E /* LoginManager.swift */; };
 		2249E0642171478500ED890A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2249E0632171478500ED890A /* LoginViewController.swift */; };
 		2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290F5DD21713A6A00BE9189 /* AppDelegate.swift */; };
 		2290F5E521713A6B00BE9189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E421713A6B00BE9189 /* Assets.xcassets */; };
 		2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */; };
+		22F9195621724906000DAED6 /* UserInputDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195521724906000DAED6 /* UserInputDataViewController.swift */; };
+		22F9195921724A8C000DAED6 /* RootVCSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */; };
+		22F9195C217252FE000DAED6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195B217252FE000DAED6 /* User.swift */; };
 		A0D5923724BF230563DAFAE3 /* Pods_MonKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96D3032C9C15E621355F97B /* Pods_MonKey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0BA9A63DDEA1BA581BDB6549 /* Pods-MonKey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonKey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonKey/Pods-MonKey.debug.xcconfig"; sourceTree = "<group>"; };
+		220EE8CE21727ABC009E7C9E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		220EE8D0217281E9009E7C9E /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		2249E0632171478500ED890A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2290F5DA21713A6A00BE9189 /* MonKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2290F5DD21713A6A00BE9189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2290F5E421713A6B00BE9189 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2290F5E721713A6C00BE9189 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2290F5E921713A6C00BE9189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22F9195521724906000DAED6 /* UserInputDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputDataViewController.swift; sourceTree = "<group>"; };
+		22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCSwitcher.swift; sourceTree = "<group>"; };
+		22F9195B217252FE000DAED6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BACE8E3A64E3EFA087968F02 /* Pods-MonKey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonKey.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonKey/Pods-MonKey.release.xcconfig"; sourceTree = "<group>"; };
 		D96D3032C9C15E621355F97B /* Pods_MonKey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonKey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -42,6 +52,8 @@
 			isa = PBXGroup;
 			children = (
 				2249E0632171478500ED890A /* LoginViewController.swift */,
+				22F9195521724906000DAED6 /* UserInputDataViewController.swift */,
+				220EE8CE21727ABC009E7C9E /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -74,14 +86,33 @@
 		2290F5DC21713A6A00BE9189 /* MonKey */ = {
 			isa = PBXGroup;
 			children = (
+				22F9195721724A3F000DAED6 /* Common */,
 				2249E0652171497A00ED890A /* Controller */,
 				2249E0662171498900ED890A /* View */,
 				2290F5DD21713A6A00BE9189 /* AppDelegate.swift */,
+				22F9195A217252A4000DAED6 /* Model */,
 				2290F5E421713A6B00BE9189 /* Assets.xcassets */,
 				2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */,
 				2290F5E921713A6C00BE9189 /* Info.plist */,
 			);
 			path = MonKey;
+			sourceTree = "<group>";
+		};
+		22F9195721724A3F000DAED6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */,
+				220EE8D0217281E9009E7C9E /* LoginManager.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		22F9195A217252A4000DAED6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22F9195B217252FE000DAED6 /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A58757F673EB20B30D5FBD0E /* Frameworks */ = {
@@ -224,12 +255,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MonKey/Pods-MonKey-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -244,7 +277,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2249E0642171478500ED890A /* LoginViewController.swift in Sources */,
+				22F9195921724A8C000DAED6 /* RootVCSwitcher.swift in Sources */,
+				220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */,
 				2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */,
+				220EE8CF21727ABC009E7C9E /* MainViewController.swift in Sources */,
+				22F9195C217252FE000DAED6 /* User.swift in Sources */,
+				22F9195621724906000DAED6 /* UserInputDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

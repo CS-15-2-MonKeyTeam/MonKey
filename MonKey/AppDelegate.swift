@@ -11,13 +11,14 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    let rootVCSwitcher = RootVCSwitcher.shared
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let loginController = LoginViewController()
-        window = UIWindow()
-        window?.rootViewController = loginController
-        window?.makeKeyAndVisible()
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        rootVCSwitcher.window = window
+        rootVCSwitcher.initialViewController()
         
         return true
     }

@@ -1,20 +1,24 @@
 PODS:
   - AccountKit (4.35.0)
   - SnapKit (4.0.0)
+  - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
   - AccountKit
   - SnapKit (~> 4.0.0)
+  - SwiftKeychainWrapper (~> 3.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AccountKit
     - SnapKit
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: c6ec1eac2ed3930e85f949c543643adbea75f9c3
+PODFILE CHECKSUM: 83e420aa51e53f1a8abe9d9a625d278ecd8c61c5
 
 COCOAPODS: 1.5.3

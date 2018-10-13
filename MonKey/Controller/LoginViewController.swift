@@ -9,9 +9,12 @@
 import Foundation
 import UIKit
 import SnapKit
+import AccountKit
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
     
+    var accountKit = AKFAccountKit(responseType: AKFResponseType.accessToken)
     let blueColor = UIColor(red: 127/255, green: 165/255, blue: 229/255, alpha: 1.0)
     
     override func viewDidLoad() {
@@ -76,24 +79,18 @@ class LoginViewController: UIViewController {
         label.text = "Добро пожаловать в MonKey"
         label.textAlignment = .center
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 19)
+        label.font = UIFont.systemFont(ofSize: 26, weight: .heavy)
         return label
     }()
 
     lazy var descriptionText: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Это приложение поможет Вам в планировании персональных финансов, а также составит план Вашего бюджета с учетом расходов и доходов."
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.textColor = .black
-        label.font = UIFont(name:"Avenir", size: 14.0)
-        
-        let attributedString = NSMutableAttributedString(string: label.text ?? "")
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
-        paragraphStyle.alignment = .center
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-        label.attributedText = attributedString
+        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        label.setLineSpacing(label: label, spacing: 6)
         return label
     }()
 
@@ -114,6 +111,52 @@ class LoginViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = blueColor.cgColor
         button.setTitleColor(blueColor, for: .normal)
+        button.addTarget(self, action: #selector(loginByPhoneNumber), for: .touchUpInside)
         return button
     }()
+    
+    @objc func loginByPhoneNumber() {
+        loginWithPhone()
+    }
+}
+
+extension LoginViewController: AKFViewControllerDelegate {
+    func prepareLoginViewController(loginViewController: AKFViewController) {
+        loginViewController.delegate = self
+    }
+    
+    func loginWithPhone() {
+        let inputState = NSUUID().uuidString
+        let viewController = accountKit.viewControllerForPhoneLogin(with: nil, state: inputState)
+        prepareLoginViewController(loginViewController: viewController)
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!,
+                        didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        
+        // TODO:- Remove keychain proccessing from LoginVC. Create KeychainManager for this stuff
+        KeychainWrapper.standard.set("\(accessToken.tokenString)", forKey: "userToken")
+        RootVCSwitcher.shared.presentUserInputVC()
+        print("\n=======\nDid complete login with access token \(accessToken.tokenString) state \(state)\n=======\n")
+    }
+
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+        print("Login failed with: \(error)")
+    }
+    
+    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+        print("Login got cancelled")
+    }
+}
+
+extension UILabel {
+    func setLineSpacing(label: UILabel, spacing: CGFloat) {
+        let attributedString = NSMutableAttributedString(string: label.text ?? "")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        paragraphStyle.alignment = .center
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        label.attributedText = attributedString
+    }
 }
