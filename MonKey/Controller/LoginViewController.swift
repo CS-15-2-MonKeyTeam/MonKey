@@ -138,7 +138,7 @@ extension LoginViewController: AKFViewControllerDelegate {
         // TODO:- Remove keychain proccessing from LoginVC. Create KeychainManager for this stuff
         KeychainWrapper.standard.set("\(accessToken.tokenString)", forKey: "userToken")
         RootVCSwitcher.shared.presentUserInputVC()
-        print("\n=======\nDid complete login with access token \(accessToken.tokenString) state \(state)\n=======\n")
+        print("Did complete login with access token \(accessToken.tokenString) state \(state)")
     }
 
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {

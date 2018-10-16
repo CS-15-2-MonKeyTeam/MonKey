@@ -13,6 +13,7 @@ import SnapKit
 class UserInpudDataViewController: UIViewController {
     
     let blueColor = UIColor(red: 127/255, green: 165/255, blue: 229/255, alpha: 1.0)
+    var userData: [String: String] = ["user_name": String()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +117,12 @@ class UserInpudDataViewController: UIViewController {
         return button
     }()
     
+    func getUserName() -> [String: String] {
+        let userNameText = userNameTextField.text
+        userData["user_name"] = userNameText
+        return userData
+    }
+    
     @objc func textFieldDidChange(textField: UITextField) {
         let enabled = !(textField.text?.isEmpty ?? true)
         nextButton.isEnabled = enabled
@@ -123,6 +130,7 @@ class UserInpudDataViewController: UIViewController {
     
     @objc func sendUserData() {
         RootVCSwitcher.shared.presentMainVC()
+//        LoginManager.shared.sendUserData(userData: getUserName())
     }
     
     @objc func backAction() {

@@ -21,7 +21,7 @@ class RootVCSwitcher {
         // TODO:- Remove keychain proccessing from rootVcSwitcher. Create KeychainManager for this stuff
         let isLogged = KeychainWrapper.standard.string(forKey: "userToken")
         if isLogged != nil {
-            window?.rootViewController = UserInpudDataViewController()
+            window?.rootViewController = MainViewController()
         } else {
             window?.rootViewController = LoginViewController()
         }
@@ -34,8 +34,9 @@ class RootVCSwitcher {
     }
     
     func presentMainVC() {
-        let vc = MainTableViewController()
-        changeRoot(to: vc)
+        let sourceSelectorTableViewController = MainViewController()
+        let navigationController = UINavigationController(rootViewController: sourceSelectorTableViewController)
+        changeRoot(to: navigationController)
     }
     
     func presentLoginVC() {

@@ -9,4 +9,6 @@ target 'MonKey' do
   pod 'AccountKit'
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftKeychainWrapper', '~> 3.0.1'
+  pod 'Alamofire', '~> 4.7' 
+  pod 'Apollo'
 end

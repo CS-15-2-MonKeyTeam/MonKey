@@ -9,6 +9,7 @@
 import Foundation
 import AccountKit
 import SwiftKeychainWrapper
+import Alamofire
 
 class LoginManager {
     static let shared = LoginManager()
