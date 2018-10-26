@@ -40,8 +40,6 @@ class MainViewController: UITableViewController {
         cell.amountLabel.text = testArray[indexPath.row].amount
         
         cell.layer.cornerRadius = 15
-//        cell.layer.borderColor = UIColor.red.cgColor
-//        cell.layer.borderWidth = 3
         return cell
     }
     
@@ -50,6 +48,7 @@ class MainViewController: UITableViewController {
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
         testArray = [Operation.init(type: .income, amount: "+ 10 000", time: "13:49"), Operation.init(type: .costs, amount: "- 5 000", time: "12:10")]
         setNavBarItem()
+        self.tableView.separatorStyle = .none
     }
     
     func setNavBarItem() {
@@ -68,5 +67,6 @@ extension UIColor {
         static var incomeColor: UIColor { return UIColor(red: 80/255, green: 181/255, blue: 210/255, alpha: 1.0) }
         static var costsColor: UIColor { return UIColor(red: 218/255, green: 150/255, blue: 173/255, alpha: 1.0) }
         static var transfersColor: UIColor { return UIColor(red: 170/255, green: 148/255, blue: 207/255, alpha: 1.0) }
+        static var categoryColor: UIColor { return UIColor(red: 125/255, green: 166/255, blue: 230/255, alpha: 1.0) }
     }
 }

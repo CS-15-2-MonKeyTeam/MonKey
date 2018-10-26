@@ -1,0 +1,9 @@
+mutation authorize($accountkitAccessToken: String!) {
+    auth(accountkitAccessToken: $accountkitAccessToken) {
+        token
+        user {
+            id
+            phone
+        }
+    }
+}

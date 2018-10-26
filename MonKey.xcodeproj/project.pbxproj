@@ -10,12 +10,16 @@
 		220EE8CF21727ABC009E7C9E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EE8CE21727ABC009E7C9E /* MainViewController.swift */; };
 		220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EE8D0217281E9009E7C9E /* LoginManager.swift */; };
 		2249E0642171478500ED890A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2249E0632171478500ED890A /* LoginViewController.swift */; };
+		225911D0217F106B00565D06 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 225911CD217F106B00565D06 /* schema.json */; };
+		225911D2217F10ED00565D06 /* test.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 225911D1217F10ED00565D06 /* test.graphql */; };
+		225911D4217F121A00565D06 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225911D3217F121A00565D06 /* API.swift */; };
+		2262649421762575007146A6 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2262649321762575007146A6 /* MainCell.swift */; };
 		2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290F5DD21713A6A00BE9189 /* AppDelegate.swift */; };
 		2290F5E521713A6B00BE9189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E421713A6B00BE9189 /* Assets.xcassets */; };
 		2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */; };
 		22F9195621724906000DAED6 /* UserInputDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195521724906000DAED6 /* UserInputDataViewController.swift */; };
 		22F9195921724A8C000DAED6 /* RootVCSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */; };
-		22F9195C217252FE000DAED6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195B217252FE000DAED6 /* User.swift */; };
+		22F9195C217252FE000DAED6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195B217252FE000DAED6 /* KeychainManager.swift */; };
 		A0D5923724BF230563DAFAE3 /* Pods_MonKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96D3032C9C15E621355F97B /* Pods_MonKey.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +28,10 @@
 		220EE8CE21727ABC009E7C9E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		220EE8D0217281E9009E7C9E /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		2249E0632171478500ED890A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		225911CD217F106B00565D06 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = SOURCE_ROOT; };
+		225911D1217F10ED00565D06 /* test.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.graphql; sourceTree = "<group>"; };
+		225911D3217F121A00565D06 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		2262649321762575007146A6 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainCell.swift; path = ../Model/MainCell.swift; sourceTree = "<group>"; };
 		2290F5DA21713A6A00BE9189 /* MonKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2290F5DD21713A6A00BE9189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2290F5E421713A6B00BE9189 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,7 +39,7 @@
 		2290F5E921713A6C00BE9189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F9195521724906000DAED6 /* UserInputDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputDataViewController.swift; sourceTree = "<group>"; };
 		22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCSwitcher.swift; sourceTree = "<group>"; };
-		22F9195B217252FE000DAED6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		22F9195B217252FE000DAED6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		BACE8E3A64E3EFA087968F02 /* Pods-MonKey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonKey.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonKey/Pods-MonKey.release.xcconfig"; sourceTree = "<group>"; };
 		D96D3032C9C15E621355F97B /* Pods_MonKey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonKey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -61,6 +69,7 @@
 		2249E0662171498900ED890A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2262649321762575007146A6 /* MainCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -94,6 +103,9 @@
 				2290F5E421713A6B00BE9189 /* Assets.xcassets */,
 				2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */,
 				2290F5E921713A6C00BE9189 /* Info.plist */,
+				225911CD217F106B00565D06 /* schema.json */,
+				225911D1217F10ED00565D06 /* test.graphql */,
+				225911D3217F121A00565D06 /* API.swift */,
 			);
 			path = MonKey;
 			sourceTree = "<group>";
@@ -110,7 +122,7 @@
 		22F9195A217252A4000DAED6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				22F9195B217252FE000DAED6 /* User.swift */,
+				22F9195B217252FE000DAED6 /* KeychainManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +152,7 @@
 			buildConfigurationList = 2290F5EC21713A6C00BE9189 /* Build configuration list for PBXNativeTarget "MonKey" */;
 			buildPhases = (
 				76FD505D6AC920CF476AEF5C /* [CP] Check Pods Manifest.lock */,
+				22356426217D173900DA4C0D /* Generate Apollo GraphQL API */,
 				2290F5D621713A6A00BE9189 /* Sources */,
 				2290F5D721713A6A00BE9189 /* Frameworks */,
 				2290F5D821713A6A00BE9189 /* Resources */,
@@ -193,14 +206,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225911D0217F106B00565D06 /* schema.json in Resources */,
 				2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */,
 				2290F5E521713A6B00BE9189 /* Assets.xcassets in Resources */,
+				225911D2217F10ED00565D06 /* test.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22356426217D173900DA4C0D /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n";
+		};
 		76FD505D6AC920CF476AEF5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,6 +287,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MonKey/Pods-MonKey-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 			);
@@ -261,6 +296,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 			);
@@ -281,7 +318,9 @@
 				220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */,
 				2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */,
 				220EE8CF21727ABC009E7C9E /* MainViewController.swift in Sources */,
-				22F9195C217252FE000DAED6 /* User.swift in Sources */,
+				22F9195C217252FE000DAED6 /* KeychainManager.swift in Sources */,
+				2262649421762575007146A6 /* MainCell.swift in Sources */,
+				225911D4217F121A00565D06 /* API.swift in Sources */,
 				22F9195621724906000DAED6 /* UserInputDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
