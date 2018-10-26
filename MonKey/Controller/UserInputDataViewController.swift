@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 import SnapKit
+import Apollo
+import SwiftKeychainWrapper
 
 class UserInpudDataViewController: UIViewController {
     
     let blueColor = UIColor(red: 127/255, green: 165/255, blue: 229/255, alpha: 1.0)
-    var userData: [String: String] = ["user_name": String()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +67,7 @@ class UserInpudDataViewController: UIViewController {
         self.view.addSubview(userNameTextField)
         self.view.addSubview(backButton)
     }
-
+    
     lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = blueColor
@@ -117,10 +118,8 @@ class UserInpudDataViewController: UIViewController {
         return button
     }()
     
-    func getUserName() -> [String: String] {
-        let userNameText = userNameTextField.text
-        userData["user_name"] = userNameText
-        return userData
+    func getUserName() -> String {
+        return userNameTextField.text ?? ""
     }
     
     @objc func textFieldDidChange(textField: UITextField) {
@@ -129,8 +128,12 @@ class UserInpudDataViewController: UIViewController {
     }
     
     @objc func sendUserData() {
-        RootVCSwitcher.shared.presentMainVC()
-//        LoginManager.shared.sendUserData(userData: getUserName())
+        LoginManager.shared.apollo.perform(mutation: SendNameMutation(userName: getUserName())) { (result, error) in
+            if let error = error {
+                print(error)
+            }
+            RootVCSwitcher.shared.presentMainVC()
+        }
     }
     
     @objc func backAction() {

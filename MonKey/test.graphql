@@ -1,0 +1,16 @@
+mutation sendToken($accountkitAccessToken: String!) {
+    auth(accountkitAccessToken: $accountkitAccessToken) {
+        token
+        user {
+            id
+            phone
+        }
+    }
+}
+
+mutation sendName($userName: String!) {
+    updateProfile(name: $userName) {
+        name
+        phone
+    }
+}

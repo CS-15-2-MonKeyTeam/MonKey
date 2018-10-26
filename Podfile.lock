@@ -1,24 +1,34 @@
 PODS:
   - AccountKit (4.35.0)
+  - Alamofire (4.7.3)
+  - Apollo (0.9.3):
+    - Apollo/Core (= 0.9.3)
+  - Apollo/Core (0.9.3)
   - SnapKit (4.0.0)
   - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
   - AccountKit
+  - Alamofire (~> 4.7)
+  - Apollo
   - SnapKit (~> 4.0.0)
   - SwiftKeychainWrapper (~> 3.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AccountKit
+    - Alamofire
+    - Apollo
     - SnapKit
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Apollo: 38270f8bdc031ac07d4de3ec068a2289d7d287e0
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 83e420aa51e53f1a8abe9d9a625d278ecd8c61c5
+PODFILE CHECKSUM: 2ef154732f6a6ba6b9dc3c73df9ad228d942dd6a
 
 COCOAPODS: 1.5.3
