@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import Apollo
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    static let shared = AppDelegate()
-    private override init() {}
-    
     let rootVCSwitcher = RootVCSwitcher.shared
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

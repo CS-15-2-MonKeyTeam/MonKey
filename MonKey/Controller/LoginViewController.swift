@@ -11,7 +11,6 @@ import UIKit
 import SnapKit
 import AccountKit
 import SwiftKeychainWrapper
-import Apollo
 
 class LoginViewController: UIViewController {
     
@@ -119,19 +118,6 @@ class LoginViewController: UIViewController {
     @objc func loginByPhoneNumber() {
         loginWithPhone()
     }
-
-    func sendToken(accessToken: String) {
-        LoginManager.shared.apollo.perform(mutation: SendTokenMutation(accountkitAccessToken: "\(accessToken)")) { (result, error)  in
-            if let error = error {
-                print(error)
-            }
-            
-            guard let result = result else { return }
-            KeychainManager.shared.setUserObject(token: accessToken)
-            guard let bearer = result.data?.auth.token else { return }
-            KeychainManager.shared.setBearerToken(token: bearer)
-        }
-    }
 }
 
 extension LoginViewController: AKFViewControllerDelegate {
@@ -149,10 +135,10 @@ extension LoginViewController: AKFViewControllerDelegate {
     func viewController(_ viewController: (UIViewController & AKFViewController)!,
                         didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         
-        sendToken(accessToken: accessToken.tokenString)
+        // TODO:- Remove keychain proccessing from LoginVC. Create KeychainManager for this stuff
+        KeychainWrapper.standard.set("\(accessToken.tokenString)", forKey: "userToken")
         RootVCSwitcher.shared.presentUserInputVC()
-        
-        print("Did complete login with access token \(accessToken.tokenString) state \(state ?? "")")
+        print("Did complete login with access token \(accessToken.tokenString) state \(state)")
     }
 
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
