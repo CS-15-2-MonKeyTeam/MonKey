@@ -18,7 +18,7 @@ class RootVCSwitcher {
     var window: UIWindow?
     
     func initialViewController() {
-        KeychainManager.shared.isUserLoggedIn() ? presentMainVC() : presentLoginVC() // add checking user name in future
+        KeychainManager.shared.isUserLoggedIn() ? presentTab() : presentLoginVC() // add checking user name in future
     }
     
     func presentUserInputVC() {
@@ -27,16 +27,24 @@ class RootVCSwitcher {
         changeRoot(to: vc)
     }
     
-    func presentMainVC() {
-        let sourceSelectorTableViewController = MainViewController()
-        let navigationController = UINavigationController(rootViewController: sourceSelectorTableViewController)
-        changeRoot(to: navigationController)
-    }
-    
     func presentLoginVC() {
         let vc = LoginViewController()
+        vc.modalPresentationStyle = .overFullScreen
         changeRoot(to: vc)
     }
+    
+    func presentTab() {
+        let vc = MainTabViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        changeRoot(to: vc)
+    }
+    
+    func presentNewOperation() {
+        let vc = NewOperationViewController()
+//        vc.modalPresentationStyle = .overFullScreen
+        changeRoot(to: vc)
+    }
+    
     
     func changeRoot(to newRootVC: UIViewController) {
         guard let unwrappedWindow = window else { return }
@@ -46,9 +54,6 @@ class RootVCSwitcher {
             unwrappedWindow.rootViewController = newRootVC
         }, completion: { (_) in
             if oldVC != newRootVC {
-                // see: https://stackoverflow.com/questions/26763020/leaking-views-when-changing-rootviewcontroller-inside-transitionwithview
-                // old view controller is retained after chaing root view controller, so we have to manually dismiss it.
-                // not just, but also cleanup views in UITransitionView. Weird.
                 if let transitionViewClass = NSClassFromString("UITransitionView") {
                     for subview in unwrappedWindow.subviews where subview.isKind(of: transitionViewClass) {
                         subview.removeFromSuperview()

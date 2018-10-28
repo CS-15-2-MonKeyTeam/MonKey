@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private override init() {}
     
     let rootVCSwitcher = RootVCSwitcher.shared
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
         rootVCSwitcher.window = window
         rootVCSwitcher.initialViewController()
         

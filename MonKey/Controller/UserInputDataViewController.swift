@@ -132,7 +132,7 @@ class UserInpudDataViewController: UIViewController {
             if let error = error {
                 print(error)
             }
-            RootVCSwitcher.shared.presentMainVC()
+            RootVCSwitcher.shared.presentTab()
         }
     }
     

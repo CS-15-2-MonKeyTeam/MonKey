@@ -23,7 +23,7 @@ enum opertationType: String {
     case transfers = "Переводы"
 }
 
-class MainViewController: UITableViewController {
+class WalletViewController: UITableViewController {
     
     var testArray = [Operation]()
     
