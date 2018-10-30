@@ -18,7 +18,8 @@ class RootVCSwitcher {
     var window: UIWindow?
     
     func initialViewController() {
-        KeychainManager.shared.isUserLoggedIn() ? presentTab() : presentLoginVC() // add checking user name in future
+        presentNewOperation()
+//        KeychainManager.shared.isUserLoggedIn() ? presentTab() : presentLoginVC() // add checking user name in future // Why i always have to login?
     }
     
     func presentUserInputVC() {
@@ -33,16 +34,19 @@ class RootVCSwitcher {
         changeRoot(to: vc)
     }
     
-    func presentTab() {
-        let vc = MainTabViewController()
+    func presentNewOperation() {
+        let vc = NewOperationViewController()
         vc.modalPresentationStyle = .overFullScreen
         changeRoot(to: vc)
     }
     
-    func presentNewOperation() {
-        let vc = NewOperationViewController()
-//        vc.modalPresentationStyle = .overFullScreen
-        changeRoot(to: vc)
+    func presentTab() {
+        let vc = MainTabViewController()
+        var navigationController: UINavigationController?
+        guard let unwrappedWindow = window else { return }
+        navigationController = UINavigationController(rootViewController: vc)
+        unwrappedWindow.rootViewController = navigationController
+        unwrappedWindow.makeKeyAndVisible()
     }
     
     

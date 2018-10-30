@@ -23,6 +23,8 @@ class MainTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewControllers = [createTabBarElement(title: "История", image: "time.png", vc: WalletViewController()), createTabBarElement(title: "Настройки", image: "settings.png", vc: SettingsViewController())]
+        self.title = "История"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(logout))
         self.view.insertSubview(addButton, aboveSubview: self.tabBar)
     }
     
@@ -38,7 +40,8 @@ class MainTabViewController: UITabBarController {
     }
     
     @objc func openAddViewController() {
-        RootVCSwitcher.shared.presentNewOperation()
+        let vc = NewOperationViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func createTabBarElement(title: String, image: String, vc: UIViewController) -> UINavigationController {
@@ -49,4 +52,8 @@ class MainTabViewController: UITabBarController {
         return navController
     }
     
+    @objc func logout() {
+        LoginManager.shared.logout()
+        RootVCSwitcher.shared.presentLoginVC()
+    }
 }

@@ -121,16 +121,16 @@ class LoginViewController: UIViewController {
     }
 
     func sendToken(accessToken: String) {
-        LoginManager.shared.apollo.perform(mutation: SendTokenMutation(accountkitAccessToken: "\(accessToken)")) { (result, error)  in
-            if let error = error {
-                print(error)
-            }
-            
-            guard let result = result else { return }
-            KeychainManager.shared.setUserObject(token: accessToken)
-            guard let bearer = result.data?.auth.token else { return }
-            KeychainManager.shared.setBearerToken(token: bearer)
-        }
+//        LoginManager.shared.apollo.perform(mutation: SendTokenMutation(accountkitAccessToken: "\(accessToken)")) { (result, error)  in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            guard let result = result else { return }
+//            KeychainManager.shared.setUserObject(token: accessToken)
+//            guard let bearer = result.data?.auth.token else { return }
+//            KeychainManager.shared.setBearerToken(token: bearer)
+//        }
     }
 }
 

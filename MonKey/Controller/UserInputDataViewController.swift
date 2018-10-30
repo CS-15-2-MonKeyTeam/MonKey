@@ -66,6 +66,7 @@ class UserInpudDataViewController: UIViewController {
         self.view.addSubview(subtitle)
         self.view.addSubview(userNameTextField)
         self.view.addSubview(backButton)
+        self.view.addSubview(activityIndicator)
     }
     
     lazy var nextButton: UIButton = {
@@ -118,6 +119,12 @@ class UserInpudDataViewController: UIViewController {
         return button
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.frame = view.bounds
+        return activityIndicator
+    }()
+
     func getUserName() -> String {
         return userNameTextField.text ?? ""
     }
@@ -128,12 +135,15 @@ class UserInpudDataViewController: UIViewController {
     }
     
     @objc func sendUserData() {
-        LoginManager.shared.apollo.perform(mutation: SendNameMutation(userName: getUserName())) { (result, error) in
-            if let error = error {
-                print(error)
-            }
-            RootVCSwitcher.shared.presentTab()
-        }
+        activityIndicator.startAnimating()
+//        LoginManager.shared.apollo.perform(mutation: SendNameMutation(userName: getUserName())) { [weak self] (result, error) in
+//            if let error = error {
+//                self?.activityIndicator.stopAnimating()
+//                print(error)
+//            }  
+//            self?.activityIndicator.stopAnimating()
+//            RootVCSwitcher.shared.presentTab()
+//        }
     }
     
     @objc func backAction() {

@@ -47,18 +47,7 @@ class WalletViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
         testArray = [Operation.init(type: .income, amount: "+ 10 000", time: "13:49"), Operation.init(type: .costs, amount: "- 5 000", time: "12:10")]
-        setNavBarItem()
         self.tableView.separatorStyle = .none
-    }
-    
-    func setNavBarItem() {
-        self.navigationItem.title = "История"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
-    }
-    
-    @objc func logout() {
-        LoginManager.shared.logout()
-        RootVCSwitcher.shared.presentLoginVC()
     }
 }
 
