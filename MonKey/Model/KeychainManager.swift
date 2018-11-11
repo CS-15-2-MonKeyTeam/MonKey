@@ -16,6 +16,15 @@ class KeychainManager {
     
     private let kAccountKitAccessToken = "kAccountKitAccessToken"
     private let kBearerToken = "kBearerToken"
+    private let kUserName = "kUserName"
+    
+    func saveUserName(name: String) {
+        KeychainWrapper.standard.set(name, forKey: kUserName)
+    }
+    
+    func getUserName() -> Bool {
+        return KeychainWrapper.standard.string(forKey: kUserName) != nil
+    }
     
     func setUserObject(token: String) {
         KeychainWrapper.standard.set(token, forKey: kAccountKitAccessToken)

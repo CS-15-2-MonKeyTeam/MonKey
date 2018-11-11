@@ -18,7 +18,15 @@ class RootVCSwitcher {
     var window: UIWindow?
     
     func initialViewController() {
-        KeychainManager.shared.isUserLoggedIn() ? presentTab() : presentLoginVC() // add checking user name in future
+        if KeychainManager.shared.isUserLoggedIn() {
+            if KeychainManager.shared.getUserName() {
+                presentTab()
+            } else {
+                presentUserInputVC()
+            }
+        } else {
+            presentLoginVC()
+        }
     }
     
     func presentUserInputVC() {

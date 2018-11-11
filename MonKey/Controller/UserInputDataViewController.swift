@@ -128,12 +128,16 @@ class UserInpudDataViewController: UIViewController {
     }
     
     @objc func sendUserData() {
-        LoginManager.shared.apollo.perform(mutation: SendNameMutation(userName: getUserName())) { (result, error) in
-            if let error = error {
-                print(error)
-            }
-            RootVCSwitcher.shared.presentTab()
-        }
+//        LoginManager.shared.apollo.perform(mutation: SendNameMutation(userName: getUserName())) { [weak self] (result, error) in
+//            if let error = error {
+//                self?.activityIndicator.stopAnimating()
+//                print(error)
+//            }
+//            
+//            KeychainManager.shared.saveUserName(name: self?.getUserName() ?? "")
+//            self?.activityIndicator.stopAnimating()
+//            RootVCSwitcher.shared.presentTab()
+//        }
     }
     
     @objc func backAction() {

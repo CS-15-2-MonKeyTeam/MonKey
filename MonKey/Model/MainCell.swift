@@ -102,7 +102,6 @@ class MainCell: UITableViewCell {
         label.backgroundColor = UIColor.OperationColor.categoryColor
         label.clipsToBounds = true
         label.layer.cornerRadius = 10
-        label.text = "Зарплата"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)
         return label
@@ -115,7 +114,6 @@ class MainCell: UITableViewCell {
         label.backgroundColor = .white
         label.clipsToBounds = true
         label.layer.cornerRadius = 10
-        label.text = "Кредитка"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)
         label.layer.borderWidth = 1

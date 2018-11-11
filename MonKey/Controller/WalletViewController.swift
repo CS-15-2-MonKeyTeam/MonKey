@@ -9,35 +9,41 @@
 import Foundation
 import UIKit
 import SnapKit
+import Apollo
 
-
-struct Operation {
-    let type: opertationType
-    let amount: String
-    let time: String
-}
-
-enum opertationType: String {
-    case income = "Доходы"
-    case costs = "Расходы"
-    case transfers = "Переводы"
-}
+//struct Operation {
+//    let type: opertationType
+//    let amount: String
+//    let time: String
+//}
+//
+//enum opertationType: String {
+//    case income = "Доходы"
+//    case costs = "Расходы"
+//    case transfers = "Переводы"
+//}
 
 class WalletViewController: UITableViewController {
     
-    var testArray = [Operation]()
+//    var testArray = [Operation]()
+    // TODO:- Refactor this shit
+    var categoryNameArray = [String]()
+    var amountArray = [Double]()
+    var titleArray = [String]()
+    var accountNameArray = [String]()
+    var accountIdArray = [GraphQLID]()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testArray.count
+        return amountArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MainCell
-        
-        cell.operationNameLabel.text = testArray[indexPath.row].type.rawValue
+        cell.operationNameLabel.text = titleArray[indexPath.row]
+        cell.moneyTypeLabel.text = accountNameArray[indexPath.row]
+        cell.categoryLabel.text = "In Progress"
+        cell.amountLabel.text = String(amountArray[indexPath.row])
         cell.operationTypeView.backgroundColor = UIColor.OperationColor.incomeColor
-        
-        cell.amountLabel.text = testArray[indexPath.row].amount
         
         cell.layer.cornerRadius = 15
         return cell
@@ -45,10 +51,59 @@ class WalletViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
-        testArray = [Operation.init(type: .income, amount: "+ 10 000", time: "13:49"), Operation.init(type: .costs, amount: "- 5 000", time: "12:10")]
         setNavBarItem()
         self.tableView.separatorStyle = .none
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let id = self.accountIdArray[indexPath.row]
+            print("\n\(id)\n")
+            self.deleteAction(id: id)
+            self.amountArray.remove(at: indexPath.row)
+            self.titleArray.remove(at: indexPath.row)
+            self.accountNameArray.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func deleteAction(id: GraphQLID) {
+        LoginManager.shared.apollo.perform(mutation: DeleteFinanceOperationMutation(id: id)) { (result, error) in
+            if let error = error {
+                print("error\(error)")
+            }
+        }
+    }
+    
+    func fetchData() {
+        LoginManager.shared.apollo.fetch(query: GetOperationsQuery()) { (result, error) in
+            if let error = error {
+                print("\(error)")
+            }
+
+            guard let result = result?.data else { return }
+
+            let amount = result.financeOperations.compactMap{$0.amount}
+            self.amountArray.append(contentsOf: amount)
+
+            let typeNameTitle = result.financeOperations.compactMap{$0.__typename}
+            self.titleArray.append(contentsOf: typeNameTitle)
+
+            let accountName = result.financeOperations.compactMap{$0.account.name}
+            self.accountNameArray.append(contentsOf: accountName)
+
+            let accountId = result.financeOperations.compactMap{$0.id}
+            self.accountIdArray.append(contentsOf: accountId)
+
+            self.tableView.reloadData()
+        }
     }
     
     func setNavBarItem() {

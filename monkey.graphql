@@ -1,0 +1,48 @@
+mutation sendName($userName: String!) {
+    updateProfile(name: $userName) {
+        name
+        phone
+    }
+}
+
+mutation sendToken($accountkitAccessToken: String!) {
+    auth(accountkitAccessToken: $accountkitAccessToken) {
+        token
+        user {
+            id
+            phone
+        }
+    }
+}
+
+mutation createAccount($name: String!, $balance: Float!) {
+    createAccount(name: $name, balance: $balance) {
+        name
+    }
+}
+
+mutation deleteAccount($id: ID!) {
+    deleteAccount(id: $id) {
+        id
+    }
+}
+
+mutation updateAccount($id: ID!, $name: String!) {
+    updateAccount(id: $id, name: $name) {
+        id
+        name
+    }
+}
+
+mutation updateProfile($name: String!) {
+    updateProfile(name: $name) {
+        name
+    }
+}
+
+mutation createExpense($amount: Float!, accountId: ID!, $date: DateTime, $comment: String, $payee: String, $categoryId: ID) {
+    createExpense(amount: $amount, accountId: $accountId, date: $date, comment: $comment, payee: $payee, categoryId: $categoryId) {
+        amount
+        comment
+    }
+}

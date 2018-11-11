@@ -121,16 +121,16 @@ class LoginViewController: UIViewController {
     }
 
     func sendToken(accessToken: String) {
-        LoginManager.shared.apollo.perform(mutation: SendTokenMutation(accountkitAccessToken: "\(accessToken)")) { (result, error)  in
-            if let error = error {
-                print(error)
-            }
-            
-            guard let result = result else { return }
-            KeychainManager.shared.setUserObject(token: accessToken)
-            guard let bearer = result.data?.auth.token else { return }
-            KeychainManager.shared.setBearerToken(token: bearer)
-        }
+//        LoginManager.shared.apollo.perform(mutation: SendTokenMutation(accountkitAccessToken: "\(accessToken)")) { (result, error)  in
+//            if let error = error {
+//                print(error)
+//            }
+//            
+//            guard let result = result else { return }
+//            KeychainManager.shared.setUserObject(token: accessToken)
+//            guard let bearer = result.data?.auth.token else { return }
+//            KeychainManager.shared.setBearerToken(token: bearer)
+//        }
     }
 }
 
@@ -172,5 +172,18 @@ extension UILabel {
         paragraphStyle.alignment = .center
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         label.attributedText = attributedString
+    }
+}
+
+extension UITextField {
+    func setBottomBorder() {
+        self.borderStyle = .none
+        self.layer.backgroundColor = UIColor.white.cgColor
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
     }
 }
