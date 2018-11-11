@@ -12,6 +12,24 @@ import SnapKit
 import MapKit
 import Apollo
 
+//struct ExpenseModel {
+//    let amount: Double
+//    let date: Date
+//    let comment: String
+//    let payee: String
+//    let categoryId = "cjo2u06wd001f0959l7xvryai"
+//}
+//
+//enum Exasd {
+//    case accountId(GraphQLID)
+//}
+//struct Operation {
+//(amount: 15.0, accountId: "cjo2ts18y000u095904e8nlk6", date: "2018-11-08", comment: "x", payee: "xx", categoryId: "cjo2u06wd001f0959l7xvryai")
+//    let type: opertationType
+//    let amount: String
+//    let time: String
+//}
+
 class NewOperationViewController: UIViewController {
     
     var accountId: [GraphQLID]?
@@ -26,7 +44,7 @@ class NewOperationViewController: UIViewController {
         subview()
         layout()
         showDatePicker()
-//        getAccountID()
+        getAccountID()
     }
     
     func subview() {
@@ -45,18 +63,18 @@ class NewOperationViewController: UIViewController {
         self.view.addSubview(activityIndicator)
     }
     
-//    func getAccountID() {
-//        LoginManager.shared.apollo.fetch(query: AccountsQuery()) { (result, error) in
-//            if let error = error {
-//                print("\(error)")
-//            }
-//
-//            guard let result = result?.data else { return }
-//            let id = result.accounts.compactMap{$0.id}
-//            let name = result.accounts.compactMap{$0.name}
-//            self.accountId = id
-//        }
-//    }
+    func getAccountID() {
+        LoginManager.shared.apollo.fetch(query: AccountsQuery()) { (result, error) in
+            if let error = error {
+                print("\(error)")
+            }
+            
+            guard let result = result?.data else { return }
+            let id = result.accounts.compactMap{$0.id}
+            let name = result.accounts.compactMap{$0.name}
+            self.accountId = id
+        }
+    }
     
     let datePicker = UIDatePicker()
     
@@ -187,8 +205,8 @@ class NewOperationViewController: UIViewController {
     
     @objc func saveOperation() {
         activityIndicator.startAnimating()
-        guard let amountString = amountTextField.text else { return }
-        let amount = (amountString as NSString).doubleValue
+        let amountString = amountTextField.text
+        let amount = (amountString! as NSString).doubleValue
         guard
             let id = self.accountId,
             let date = txtDatePicker.text,
@@ -197,13 +215,13 @@ class NewOperationViewController: UIViewController {
                 return
         }
         
-        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: amount, accountId: "cjobn7mnj002i0936j0qq03te", date: date, comment: comment, payee: payee, categoryId: "cjo2u06wd001f0959l7xvryai")) { [weak self]
-            (result, error) in
-            
+        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: amount, accountId: "cjobn7mnj002i0936j0qq03te", date: date, comment: comment, payee: payee, categoryId: "cjo2u06wd001f0959l7xvryai")) { [unowned self] (result, error) in
             if let error = error {
                 print("\n\(error)\n")
+                self.activityIndicator.stopAnimating()
             }
-            self?.activityIndicator.stopAnimating()
+            
+            self.activityIndicator.stopAnimating()
             RootVCSwitcher.shared.presentTab()
         }
     }

@@ -25,7 +25,7 @@ import Apollo
 
 class WalletViewController: UITableViewController {
     
-//    var testArray = [Operation]()
+    //    var testArray = [Operation]()
     // TODO:- Refactor this shit
     var categoryNameArray = [String]()
     var amountArray = [Double]()
@@ -51,22 +51,24 @@ class WalletViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
         setNavBarItem()
         self.tableView.separatorStyle = .none
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             let id = self.accountIdArray[indexPath.row]
-            print("\n\(id)\n")
             self.deleteAction(id: id)
             self.amountArray.remove(at: indexPath.row)
             self.titleArray.remove(at: indexPath.row)
             self.accountNameArray.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            
         }
     }
     
@@ -87,21 +89,21 @@ class WalletViewController: UITableViewController {
             if let error = error {
                 print("\(error)")
             }
-
+            
             guard let result = result?.data else { return }
-
+            
             let amount = result.financeOperations.compactMap{$0.amount}
             self.amountArray.append(contentsOf: amount)
-
+            
             let typeNameTitle = result.financeOperations.compactMap{$0.__typename}
             self.titleArray.append(contentsOf: typeNameTitle)
-
+            
             let accountName = result.financeOperations.compactMap{$0.account.name}
             self.accountNameArray.append(contentsOf: accountName)
-
+            
             let accountId = result.financeOperations.compactMap{$0.id}
             self.accountIdArray.append(contentsOf: accountId)
-
+            
             self.tableView.reloadData()
         }
     }
