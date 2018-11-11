@@ -11,7 +11,6 @@
 		220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EE8D0217281E9009E7C9E /* LoginManager.swift */; };
 		2249E0642171478500ED890A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2249E0632171478500ED890A /* LoginViewController.swift */; };
 		2262649421762575007146A6 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2262649321762575007146A6 /* MainCell.swift */; };
-		226745B7219746B000881A59 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 226745B6219746B000881A59 /* schema.json */; };
 		226745B9219746D400881A59 /* monkey.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 226745B8219746D400881A59 /* monkey.graphql */; };
 		226745BB2197474B00881A59 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226745BA2197474A00881A59 /* API.swift */; };
 		2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290F5DD21713A6A00BE9189 /* AppDelegate.swift */; };
@@ -19,6 +18,7 @@
 		2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */; };
 		22963D2A21865F4D00D475C6 /* NewOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22963D2921865F4D00D475C6 /* NewOperationViewController.swift */; };
 		22963D2C218662AD00D475C6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22963D2B218662AD00D475C6 /* SettingsViewController.swift */; };
+		229C993A2198A88A00D3D944 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 229C99392198A88A00D3D944 /* schema.json */; };
 		22E1209F2183C65C00926289 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1209E2183C65C00926289 /* MainTabViewController.swift */; };
 		22F9195621724906000DAED6 /* UserInputDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195521724906000DAED6 /* UserInputDataViewController.swift */; };
 		22F9195921724A8C000DAED6 /* RootVCSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */; };
@@ -32,7 +32,6 @@
 		220EE8D0217281E9009E7C9E /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		2249E0632171478500ED890A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2262649321762575007146A6 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainCell.swift; path = ../Model/MainCell.swift; sourceTree = "<group>"; };
-		226745B6219746B000881A59 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = SOURCE_ROOT; };
 		226745B8219746D400881A59 /* monkey.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = monkey.graphql; sourceTree = "<group>"; };
 		226745BA2197474A00881A59 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		2290F5DA21713A6A00BE9189 /* MonKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +41,7 @@
 		2290F5E921713A6C00BE9189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22963D2921865F4D00D475C6 /* NewOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOperationViewController.swift; sourceTree = "<group>"; };
 		22963D2B218662AD00D475C6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		229C99392198A88A00D3D944 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		22E1209E2183C65C00926289 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		22F9195521724906000DAED6 /* UserInputDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputDataViewController.swift; sourceTree = "<group>"; };
 		22F9195821724A8C000DAED6 /* RootVCSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCSwitcher.swift; sourceTree = "<group>"; };
@@ -70,6 +70,7 @@
 				220EE8CE21727ABC009E7C9E /* WalletViewController.swift */,
 				22963D2921865F4D00D475C6 /* NewOperationViewController.swift */,
 				22963D2B218662AD00D475C6 /* SettingsViewController.swift */,
+				22E1209E2183C65C00926289 /* MainTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -78,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				2262649321762575007146A6 /* MainCell.swift */,
-				22E1209E2183C65C00926289 /* MainTabViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,8 +104,8 @@
 		2290F5DC21713A6A00BE9189 /* MonKey */ = {
 			isa = PBXGroup;
 			children = (
+				229C99392198A88A00D3D944 /* schema.json */,
 				226745BA2197474A00881A59 /* API.swift */,
-				226745B6219746B000881A59 /* schema.json */,
 				226745B8219746D400881A59 /* monkey.graphql */,
 				22F9195721724A3F000DAED6 /* Common */,
 				2249E0652171497A00ED890A /* Controller */,
@@ -215,8 +215,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				229C993A2198A88A00D3D944 /* schema.json in Resources */,
 				2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */,
-				226745B7219746B000881A59 /* schema.json in Resources */,
 				226745B9219746D400881A59 /* monkey.graphql in Resources */,
 				2290F5E521713A6B00BE9189 /* Assets.xcassets in Resources */,
 			);

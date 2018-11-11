@@ -12,28 +12,53 @@ import SnapKit
 import MapKit
 import Apollo
 
-
 class NewOperationViewController: UIViewController {
+    
+    var accountId: [GraphQLID]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
+        self.view.backgroundColor = .white
+        self.title = "Добавить сумму"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveOperation))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
         subview()
         layout()
         showDatePicker()
+//        getAccountID()
     }
     
-    @objc func saveOperation() {
-        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: 15.0, accountId: "cjo2ts18y000u095904e8nlk6", date: "2018-11-08", comment: "x", payee: "xx", categoryId: "cjo2u06wd001f0959l7xvryai")) { (result, error) in
-            if let error = error {
-                print("\n\(error)\n")
-            }
-            
-            guard let result = result else { return }
-            print("\n\nRESULT\n\(result)\n\n")
-        }
+    func subview() {
+        self.view.addSubview(incomeButton)
+        self.view.addSubview(outcomeButton)
+        self.view.addSubview(transactionButton)
+        self.view.addSubview(txtDatePicker)
+        self.view.addSubview(selectDateLabel)
+        self.view.addSubview(noteTextField)
+        self.view.addSubview(noteLabel)
+        self.view.addSubview(amountTextField)
+        self.view.addSubview(amountLabel)
+        self.view.addSubview(payeeTextField)
+        self.view.addSubview(payeeLabel)
+        
+        self.view.addSubview(activityIndicator)
     }
+    
+//    func getAccountID() {
+//        LoginManager.shared.apollo.fetch(query: AccountsQuery()) { (result, error) in
+//            if let error = error {
+//                print("\(error)")
+//            }
+//
+//            guard let result = result?.data else { return }
+//            let id = result.accounts.compactMap{$0.id}
+//            let name = result.accounts.compactMap{$0.name}
+//            self.accountId = id
+//        }
+//    }
+    
+    let datePicker = UIDatePicker()
     
     lazy var incomeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -88,18 +113,36 @@ class NewOperationViewController: UIViewController {
         return label
     }()
     
-    lazy var mapPosition: UILabel = {
-        let label = UILabel()
-        label.text = "🚩 Местоположение"
-        label.textColor = .lightGray
-        return label
-    }()
-    
     lazy var noteLabel: UILabel = {
         let label = UILabel()
         label.text = "🖋 Примечание"
         label.textColor = .lightGray
         return label
+    }()
+    
+    lazy var amountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "💸 Сумма"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    lazy var payeeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "🦹🏻‍♂️ Назначение"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    lazy var amountTextField: UITextField = {
+        let field = UITextField()
+        field.backgroundColor = .white
+        field.textAlignment = .right
+        field.placeholder = "Добавьте сумму"
+        field.keyboardType = .decimalPad
+        field.resignFirstResponder()
+        field.setBottomBorder()
+        return field
     }()
     
     lazy var noteTextField: UITextField = {
@@ -108,26 +151,65 @@ class NewOperationViewController: UIViewController {
         field.textAlignment = .right
         field.placeholder = "Добавьте примечание"
         field.setBottomBorder()
-        field.addTarget(self, action: #selector(textFieldDidChange(_:)),
-                        for: UIControl.Event.editingChanged)
         return field
     }()
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        noteLabel.isHidden = true
+    lazy var payeeTextField: UITextField = {
+        let field = UITextField()
+        field.backgroundColor = .white
+        field.textAlignment = .right
+        field.placeholder = "Добавьте назначение"
+        field.setBottomBorder()
+        return field
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView(style: .gray)
+        ai.frame = view.bounds
+        return ai
+    }()
+    
+    func showDatePicker(){
+        datePicker.datePickerMode = .date
+        
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(datePickerFunc));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        txtDatePicker.inputAccessoryView = toolbar
+        txtDatePicker.inputView = datePicker
+        
     }
     
-    lazy var mapButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .red
-        button.setTitle("Save", for: .normal)
-        button.addTarget(self, action: #selector(openMap), for: .touchUpInside)
-        button.layer.cornerRadius = 20
-        button.isHidden = true
-        return button
-    }()
-
-    @objc func openMap() {
+    @objc func saveOperation() {
+        activityIndicator.startAnimating()
+        guard let amountString = amountTextField.text else { return }
+        let amount = (amountString as NSString).doubleValue
+        guard
+            let id = self.accountId,
+            let date = txtDatePicker.text,
+            let comment = noteTextField.text,
+            let payee = payeeTextField.text else {
+                return
+        }
+        
+        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: amount, accountId: "cjobn7mnj002i0936j0qq03te", date: date, comment: comment, payee: payee, categoryId: "cjo2u06wd001f0959l7xvryai")) { [weak self]
+            (result, error) in
+            
+            if let error = error {
+                print("\n\(error)\n")
+            }
+            self?.activityIndicator.stopAnimating()
+            RootVCSwitcher.shared.presentTab()
+        }
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        amountTextField.resignFirstResponder()
     }
     
     @objc func changeButtonColor(button: UIButton) {
@@ -142,29 +224,11 @@ class NewOperationViewController: UIViewController {
         }
     }
     
-    let datePicker = UIDatePicker()
-    
-    
-    func showDatePicker(){
-        datePicker.datePickerMode = .dateAndTime
-        
-        let toolbar = UIToolbar();
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
-        
-        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
-        
-        txtDatePicker.inputAccessoryView = toolbar
-        txtDatePicker.inputView = datePicker
-        
-    }
-    
-    @objc func donedatePicker(){
+    @objc func datePickerFunc(){
         let formatter = DateFormatter()
-        formatter.dateFormat = "EE, MMM d, yyyy, hh:mm"
+        formatter.dateFormat = "yyyy-MM-dd"
         txtDatePicker.text = formatter.string(from: datePicker.date)
+        
         self.view.endEditing(true)
     }
     
@@ -222,24 +286,32 @@ class NewOperationViewController: UIViewController {
             make.right.equalToSuperview().offset(-20)
         }
         
-        mapButton.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.equalTo(80)
-            make.height.equalTo(50)
+        amountLabel.snp.makeConstraints { (make) in
+            make.width.equalTo(130)
+            make.height.equalTo(35)
+            make.top.equalTo(noteTextField.snp.bottom).offset(35)
+            make.left.equalToSuperview().offset(15)
+        }
+        
+        amountTextField.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().offset(-35)
+            make.height.equalTo(35)
+            make.top.equalTo(noteLabel.snp.bottom).offset(35)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        payeeLabel.snp.makeConstraints { (make) in
+            make.width.equalTo(130)
+            make.height.equalTo(35)
+            make.top.equalTo(amountTextField.snp.bottom).offset(35)
+            make.left.equalToSuperview().offset(15)
+        }
+        
+        payeeTextField.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().offset(-35)
+            make.height.equalTo(35)
+            make.top.equalTo(amountLabel.snp.bottom).offset(35)
+            make.right.equalToSuperview().offset(-20)
         }
     }
-    
-    func subview() {
-        self.view.addSubview(incomeButton)
-        self.view.addSubview(outcomeButton)
-        self.view.addSubview(transactionButton)
-        self.view.addSubview(txtDatePicker)
-        self.view.addSubview(selectDateLabel)
-        self.view.addSubview(noteTextField)
-        self.view.addSubview(noteLabel)
-        self.view.addSubview(mapButton)
-    }
-
-
-    
 }

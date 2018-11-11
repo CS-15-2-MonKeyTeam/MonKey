@@ -43,13 +43,15 @@ class RootVCSwitcher {
     
     func presentTab() {
         let vc = MainTabViewController()
-        vc.modalPresentationStyle = .overFullScreen
-        changeRoot(to: vc)
+        var navigationController: UINavigationController?
+        guard let unwrappedWindow = window else { return }
+        navigationController = UINavigationController(rootViewController: vc)
+        unwrappedWindow.rootViewController = navigationController
+        unwrappedWindow.makeKeyAndVisible()
     }
     
     func presentNewOperation() {
         let vc = NewOperationViewController()
-//        vc.modalPresentationStyle = .overFullScreen
         changeRoot(to: vc)
     }
     

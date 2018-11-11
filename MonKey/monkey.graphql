@@ -89,3 +89,18 @@ query getOperations {
         }
     }
 }
+
+query accounts {
+    accounts {
+        id
+        name
+    }
+}
+
+query me {
+    me {
+        id
+        phone
+        name
+    }
+}
