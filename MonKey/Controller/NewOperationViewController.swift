@@ -12,24 +12,6 @@ import SnapKit
 import MapKit
 import Apollo
 
-//struct ExpenseModel {
-//    let amount: Double
-//    let date: Date
-//    let comment: String
-//    let payee: String
-//    let categoryId = "cjo2u06wd001f0959l7xvryai"
-//}
-//
-//enum Exasd {
-//    case accountId(GraphQLID)
-//}
-//struct Operation {
-//(amount: 15.0, accountId: "cjo2ts18y000u095904e8nlk6", date: "2018-11-08", comment: "x", payee: "xx", categoryId: "cjo2u06wd001f0959l7xvryai")
-//    let type: opertationType
-//    let amount: String
-//    let time: String
-//}
-
 class NewOperationViewController: UIViewController {
     
     var accountId: [GraphQLID]?

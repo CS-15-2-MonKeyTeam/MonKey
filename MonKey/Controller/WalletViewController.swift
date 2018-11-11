@@ -11,21 +11,8 @@ import UIKit
 import SnapKit
 import Apollo
 
-//struct Operation {
-//    let type: opertationType
-//    let amount: String
-//    let time: String
-//}
-//
-//enum opertationType: String {
-//    case income = "Доходы"
-//    case costs = "Расходы"
-//    case transfers = "Переводы"
-//}
-
 class WalletViewController: UITableViewController {
     
-    //    var testArray = [Operation]()
     // TODO:- Refactor this shit
     var categoryNameArray = [String]()
     var amountArray = [Double]()
