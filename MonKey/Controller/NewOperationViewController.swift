@@ -25,7 +25,7 @@ class NewOperationViewController: UIViewController {
     }
     
     @objc func saveOperation() {
-        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: 15.0, accountId: "cjo2ts18y000u095904e8nlk6", date: "2018-11-08", comment: "govno", payee: "zalupa", categoryId: "cjo2u06wd001f0959l7xvryai")) { (result, error) in
+        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: 15.0, accountId: "cjo2ts18y000u095904e8nlk6", date: "2018-11-08", comment: "x", payee: "xx", categoryId: "cjo2u06wd001f0959l7xvryai")) { (result, error) in
             if let error = error {
                 print("\n\(error)\n")
             }
