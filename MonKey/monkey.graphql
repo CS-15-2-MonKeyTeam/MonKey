@@ -17,7 +17,9 @@ mutation sendToken($accountkitAccessToken: String!) {
 
 mutation createAccount($name: String!, $balance: Float!) {
     createAccount(name: $name, balance: $balance) {
+        id
         name
+        balance
     }
 }
 

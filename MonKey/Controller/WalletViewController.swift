@@ -45,6 +45,7 @@ class WalletViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.title = "История"
         fetchData()
     }
     

@@ -16,6 +16,8 @@
 		2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290F5DD21713A6A00BE9189 /* AppDelegate.swift */; };
 		2290F5E521713A6B00BE9189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E421713A6B00BE9189 /* Assets.xcassets */; };
 		2290F5E821713A6C00BE9189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2290F5E621713A6C00BE9189 /* LaunchScreen.storyboard */; };
+		2292DC2E2199D2FA00AB2167 /* NewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292DC2D2199D2FA00AB2167 /* NewAccountViewController.swift */; };
+		2292DC302199D5F000AB2167 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292DC2F2199D5F000AB2167 /* StatisticViewController.swift */; };
 		22963D2A21865F4D00D475C6 /* NewOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22963D2921865F4D00D475C6 /* NewOperationViewController.swift */; };
 		22963D2C218662AD00D475C6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22963D2B218662AD00D475C6 /* SettingsViewController.swift */; };
 		229C993A2198A88A00D3D944 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 229C99392198A88A00D3D944 /* schema.json */; };
@@ -39,6 +41,8 @@
 		2290F5E421713A6B00BE9189 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2290F5E721713A6C00BE9189 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2290F5E921713A6C00BE9189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2292DC2D2199D2FA00AB2167 /* NewAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountViewController.swift; sourceTree = "<group>"; };
+		2292DC2F2199D5F000AB2167 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		22963D2921865F4D00D475C6 /* NewOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOperationViewController.swift; sourceTree = "<group>"; };
 		22963D2B218662AD00D475C6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		229C99392198A88A00D3D944 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 				22963D2921865F4D00D475C6 /* NewOperationViewController.swift */,
 				22963D2B218662AD00D475C6 /* SettingsViewController.swift */,
 				22E1209E2183C65C00926289 /* MainTabViewController.swift */,
+				2292DC2D2199D2FA00AB2167 /* NewAccountViewController.swift */,
+				2292DC2F2199D5F000AB2167 /* StatisticViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -323,9 +329,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22963D2A21865F4D00D475C6 /* NewOperationViewController.swift in Sources */,
+				2292DC302199D5F000AB2167 /* StatisticViewController.swift in Sources */,
 				2249E0642171478500ED890A /* LoginViewController.swift in Sources */,
 				22F9195921724A8C000DAED6 /* RootVCSwitcher.swift in Sources */,
 				220EE8D1217281E9009E7C9E /* LoginManager.swift in Sources */,
+				2292DC2E2199D2FA00AB2167 /* NewAccountViewController.swift in Sources */,
 				2290F5DE21713A6A00BE9189 /* AppDelegate.swift in Sources */,
 				220EE8CF21727ABC009E7C9E /* WalletViewController.swift in Sources */,
 				22E1209F2183C65C00926289 /* MainTabViewController.swift in Sources */,

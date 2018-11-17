@@ -1,23 +1,27 @@
 //
-//  SettingsViewController.swift
+//  StatisticViewController.swift
 //  MonKey
 //
-//  Created by Rodion Kuskov on 10/28/18.
+//  Created by Rodion Kuskov on 11/12/18.
 //  Copyright © 2018 Rodion Kuskov. All rights reserved.
 //
 
 import Foundation
 import UIKit
+import SnapKit
 
-class SettingsViewController: UIViewController {
+class StatisticViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .green
+        self.view.backgroundColor = .magenta
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.title = "Настройки"
+        self.tabBarController?.title = "Статистика"
     }
+    
 }
+
+

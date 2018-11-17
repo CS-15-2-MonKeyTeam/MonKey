@@ -22,8 +22,7 @@ class MainTabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [createTabBarElement(title: "История", image: "time.png", vc: WalletViewController()), createTabBarElement(title: "Настройки", image: "settings.png", vc: SettingsViewController())]
-        self.title = "История"
+        viewControllers = [createTabBarElement(title: "Счета", image: "wallet.png", vc: NewAccountViewController()), createTabBarElement(title: "Статистика", image: "chart.png", vc: StatisticViewController()), createTabBarElement(title: "История", image: "time.png", vc: WalletViewController()), createTabBarElement(title: "Настройки", image: "settings.png", vc: SettingsViewController())]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(logout))
         self.view.insertSubview(addButton, aboveSubview: self.tabBar)
     }
@@ -49,6 +48,7 @@ class MainTabViewController: UITabBarController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.title = title
         navController.tabBarItem.image = UIImage(named: image)
+        self.tabBarController?.title = title
         return navController
     }
     

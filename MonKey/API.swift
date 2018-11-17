@@ -229,7 +229,7 @@ public final class SendTokenMutation: GraphQLMutation {
 
 public final class CreateAccountMutation: GraphQLMutation {
   public let operationDefinition =
-    "mutation createAccount($name: String!, $balance: Float!) {\n  createAccount(name: $name, balance: $balance) {\n    __typename\n    name\n  }\n}"
+    "mutation createAccount($name: String!, $balance: Float!) {\n  createAccount(name: $name, balance: $balance) {\n    __typename\n    id\n    name\n    balance\n  }\n}"
 
   public var name: String
   public var balance: Double
@@ -274,7 +274,9 @@ public final class CreateAccountMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("balance", type: .nonNull(.scalar(Double.self))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -283,8 +285,8 @@ public final class CreateAccountMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String) {
-        self.init(unsafeResultMap: ["__typename": "Account", "name": name])
+      public init(id: GraphQLID, name: String, balance: Double) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "balance": balance])
       }
 
       public var __typename: String {
@@ -296,12 +298,30 @@ public final class CreateAccountMutation: GraphQLMutation {
         }
       }
 
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
       public var name: String {
         get {
           return resultMap["name"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var balance: Double {
+        get {
+          return resultMap["balance"]! as! Double
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "balance")
         }
       }
     }
