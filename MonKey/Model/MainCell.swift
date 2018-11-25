@@ -58,12 +58,12 @@ class MainCell: UITableViewCell {
         
         categoryLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
         categoryLabel.leftAnchor.constraint(equalTo: operationTypeView.rightAnchor, constant: 10).isActive = true
-        categoryLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        categoryLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 75).isActive = true
         categoryLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
         
         moneyTypeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
         moneyTypeLabel.leftAnchor.constraint(equalTo: categoryLabel.rightAnchor, constant: 10).isActive = true
-        moneyTypeLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        moneyTypeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 75).isActive = true
         moneyTypeLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
         
         timeLabel.centerYAnchor.constraint(equalTo: moneyTypeLabel.centerYAnchor).isActive = true

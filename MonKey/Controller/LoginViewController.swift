@@ -51,13 +51,6 @@ class LoginViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
         }
-        
-        registrationButton.snp.makeConstraints { (make) in
-            make.width.equalTo(220)
-            make.height.equalTo(50)
-            make.bottom.equalTo(loginButton.snp.top).offset(-15)
-            make.centerX.equalToSuperview()
-        }
     }
     
     func subview() {
@@ -65,7 +58,6 @@ class LoginViewController: UIViewController {
         self.view.addSubview(welcomeText)
         self.view.addSubview(descriptionText)
         self.view.addSubview(loginButton)
-        self.view.addSubview(registrationButton)
     }
     
     lazy var loginLogo: UIImageView = {

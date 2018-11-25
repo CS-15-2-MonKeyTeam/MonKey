@@ -3160,26 +3160,6 @@
             "defaultValue": null
           },
           {
-            "name": "public",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "public_not",
-            "description": "All values that are not equal to given value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "owner",
             "description": "",
             "type": {
@@ -3618,26 +3598,6 @@
           },
           {
             "name": "mandatory_not",
-            "description": "All values that are not equal to given value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "public",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "public_not",
             "description": "All values that are not equal to given value.",
             "type": {
               "kind": "SCALAR",
@@ -4226,18 +4186,6 @@
             "deprecationReason": null
           },
           {
-            "name": "public_ASC",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "public_DESC",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updatedAt_ASC",
             "description": "",
             "isDeprecated": false,
@@ -4303,22 +4251,6 @@
           },
           {
             "name": "mandatory",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "public",
             "description": "",
             "args": [],
             "type": {
@@ -4413,18 +4345,6 @@
             "deprecationReason": null
           },
           {
-            "name": "public_ASC",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "public_DESC",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updatedAt_ASC",
             "description": "",
             "isDeprecated": false,
@@ -4490,22 +4410,6 @@
           },
           {
             "name": "mandatory",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "public",
             "description": "",
             "args": [],
             "type": {

@@ -11,4 +11,5 @@ target 'MonKey' do
   pod 'SwiftKeychainWrapper', '~> 3.0.1'
   pod 'Alamofire', '~> 4.7' 
   pod 'Apollo'
+  pod 'M13Checkbox', :git => 'https://github.com/Marxon13/M13Checkbox', :tag => '3.3.0'
 end

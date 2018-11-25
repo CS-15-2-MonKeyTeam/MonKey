@@ -14,7 +14,9 @@ import Apollo
 
 class NewOperationViewController: UIViewController {
     
-    var accountId: [GraphQLID]?
+    static var accountId: GraphQLID?
+    var cashAccount: [String: String]?
+    var cardAccount: [String: String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,36 +28,10 @@ class NewOperationViewController: UIViewController {
         subview()
         layout()
         showDatePicker()
-        getAccountID()
     }
     
-    func subview() {
-        self.view.addSubview(incomeButton)
-        self.view.addSubview(outcomeButton)
-        self.view.addSubview(transactionButton)
-        self.view.addSubview(txtDatePicker)
-        self.view.addSubview(selectDateLabel)
-        self.view.addSubview(noteTextField)
-        self.view.addSubview(noteLabel)
-        self.view.addSubview(amountTextField)
-        self.view.addSubview(amountLabel)
-        self.view.addSubview(payeeTextField)
-        self.view.addSubview(payeeLabel)
-        
-        self.view.addSubview(activityIndicator)
-    }
-    
-    func getAccountID() {
-        LoginManager.shared.apollo.fetch(query: AccountsQuery()) { (result, error) in
-            if let error = error {
-                print("\(error)")
-            }
-            
-            guard let result = result?.data else { return }
-            let id = result.accounts.compactMap{$0.id}
-            let name = result.accounts.compactMap{$0.name}
-            self.accountId = id
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     let datePicker = UIDatePicker()
@@ -134,6 +110,25 @@ class NewOperationViewController: UIViewController {
         return label
     }()
     
+    lazy var walletLabel: UILabel = {
+        let label = UILabel()
+        label.text = "💳 Счет"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    lazy var chooseWalletButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("  Выбрать кошелек  ", for: .normal)
+        button.setTitleColor(UIColor.OperationColor.categoryColor, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.OperationColor.categoryColor.cgColor
+        button.frame = CGRect(x: 0, y: 0, width: 0, height: 35)
+        button.layer.cornerRadius = 17
+        button.addTarget(self, action: #selector(openWalletView), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var amountTextField: UITextField = {
         let field = UITextField()
         field.backgroundColor = .white
@@ -182,7 +177,12 @@ class NewOperationViewController: UIViewController {
         
         txtDatePicker.inputAccessoryView = toolbar
         txtDatePicker.inputView = datePicker
-        
+    }
+    
+    @objc func openWalletView() {
+        let vc = WalletViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func saveOperation() {
@@ -190,14 +190,16 @@ class NewOperationViewController: UIViewController {
         let amountString = amountTextField.text
         let amount = (amountString! as NSString).doubleValue
         guard
-            let id = self.accountId,
             let date = txtDatePicker.text,
             let comment = noteTextField.text,
             let payee = payeeTextField.text else {
                 return
         }
         
-        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: amount, accountId: "cjobn7mnj002i0936j0qq03te", date: date, comment: comment, payee: payee, categoryId: "cjo2u06wd001f0959l7xvryai")) { [unowned self] (result, error) in
+        guard let accountId = NewOperationViewController.accountId else { return }
+        
+        // Remove this func from selector.
+        LoginManager.shared.apollo.perform(mutation: CreateExpenseMutation(amount: amount, accountId: accountId, date: date, comment: comment, payee: payee, categoryId: "cjovg671n00090984itwn5n2v")) { [unowned self] (result, error) in
             if let error = error {
                 print("\n\(error)\n")
                 self.activityIndicator.stopAnimating()
@@ -313,5 +315,34 @@ class NewOperationViewController: UIViewController {
             make.top.equalTo(amountLabel.snp.bottom).offset(35)
             make.right.equalToSuperview().offset(-20)
         }
+        
+        walletLabel.snp.makeConstraints { (make) in
+            
+            make.height.equalTo(25)
+            make.top.equalTo(payeeTextField.snp.bottom).offset(35)
+            make.left.equalToSuperview().offset(15)
+        }
+        
+        chooseWalletButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(walletLabel.snp.centerY)
+            make.right.equalToSuperview().offset(-20)
+        }
+    }
+    
+    func subview() {
+        view.addSubview(incomeButton)
+        view.addSubview(outcomeButton)
+        view.addSubview(transactionButton)
+        view.addSubview(txtDatePicker)
+        view.addSubview(selectDateLabel)
+        view.addSubview(noteTextField)
+        view.addSubview(noteLabel)
+        view.addSubview(amountTextField)
+        view.addSubview(amountLabel)
+        view.addSubview(payeeTextField)
+        view.addSubview(payeeLabel)
+        view.addSubview(activityIndicator)
+        view.addSubview(walletLabel)
+        view.addSubview(chooseWalletButton)
     }
 }

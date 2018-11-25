@@ -71,22 +71,6 @@ query getOperations {
             category {
                 id
                 name
-                public
-            }
-        }
-        ... on Income {
-            place
-            category {
-                id
-                name
-                public
-            }
-        }
-        ... on Transfer {
-            toAccount{
-                id
-                name
-                balance
             }
         }
     }

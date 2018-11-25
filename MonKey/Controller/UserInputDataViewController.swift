@@ -22,6 +22,8 @@ class UserInpudDataViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
         subview()
         layout()
     }
@@ -131,6 +133,7 @@ class UserInpudDataViewController: UIViewController {
     
     @objc func textFieldDidChange(textField: UITextField) {
         let enabled = !(textField.text?.isEmpty ?? true)
+        userNameTextField.resignFirstResponder()
         nextButton.isEnabled = enabled
     }
     
@@ -150,5 +153,9 @@ class UserInpudDataViewController: UIViewController {
     @objc func backAction() {
         RootVCSwitcher.shared.presentLoginVC()
         LoginManager.shared.logout()
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        userNameTextField.resignFirstResponder()
     }
 }

@@ -765,7 +765,7 @@ public final class DeleteFinanceOperationMutation: GraphQLMutation {
 
 public final class GetOperationsQuery: GraphQLQuery {
   public let operationDefinition =
-    "query getOperations {\n  financeOperations {\n    __typename\n    id\n    amount\n    date\n    comment\n    account {\n      __typename\n      name\n      balance\n    }\n    ... on Expense {\n      payee\n      category {\n        __typename\n        id\n        name\n        public\n      }\n    }\n    ... on Income {\n      place\n      category {\n        __typename\n        id\n        name\n        public\n      }\n    }\n    ... on Transfer {\n      toAccount {\n        __typename\n        id\n        name\n        balance\n      }\n    }\n  }\n}"
+    "query getOperations {\n  financeOperations {\n    __typename\n    id\n    amount\n    date\n    comment\n    account {\n      __typename\n      name\n      balance\n    }\n    ... on Expense {\n      payee\n      category {\n        __typename\n        id\n        name\n      }\n    }\n  }\n}"
 
   public init() {
   }
@@ -801,7 +801,7 @@ public final class GetOperationsQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLTypeCase(
-          variants: ["Expense": AsExpense.selections, "Income": AsIncome.selections, "Transfer": AsTransfer.selections],
+          variants: ["Expense": AsExpense.selections],
           default: [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
@@ -819,16 +819,16 @@ public final class GetOperationsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
+      public static func makeIncome(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: Account) -> FinanceOperation {
+        return FinanceOperation(unsafeResultMap: ["__typename": "Income", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap])
+      }
+
+      public static func makeTransfer(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: Account) -> FinanceOperation {
+        return FinanceOperation(unsafeResultMap: ["__typename": "Transfer", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap])
+      }
+
       public static func makeExpense(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: AsExpense.Account, payee: String? = nil, category: AsExpense.Category? = nil) -> FinanceOperation {
         return FinanceOperation(unsafeResultMap: ["__typename": "Expense", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap, "payee": payee, "category": category.flatMap { (value: AsExpense.Category) -> ResultMap in value.resultMap }])
-      }
-
-      public static func makeIncome(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: AsIncome.Account, place: String? = nil, category: AsIncome.Category? = nil) -> FinanceOperation {
-        return FinanceOperation(unsafeResultMap: ["__typename": "Income", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap, "place": place, "category": category.flatMap { (value: AsIncome.Category) -> ResultMap in value.resultMap }])
-      }
-
-      public static func makeTransfer(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: AsTransfer.Account, toAccount: AsTransfer.ToAccount) -> FinanceOperation {
-        return FinanceOperation(unsafeResultMap: ["__typename": "Transfer", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap, "toAccount": toAccount.resultMap])
       }
 
       public var __typename: String {
@@ -1093,7 +1093,6 @@ public final class GetOperationsQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("public", type: .nonNull(.scalar(Bool.self))),
           ]
 
           public private(set) var resultMap: ResultMap
@@ -1102,8 +1101,8 @@ public final class GetOperationsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, name: String, `public`: Bool) {
-            self.init(unsafeResultMap: ["__typename": "ExpenseCategory", "id": id, "name": name, "public": `public`])
+          public init(id: GraphQLID, name: String) {
+            self.init(unsafeResultMap: ["__typename": "ExpenseCategory", "id": id, "name": name])
           }
 
           public var __typename: String {
@@ -1130,429 +1129,6 @@ public final class GetOperationsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var `public`: Bool {
-            get {
-              return resultMap["public"]! as! Bool
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "public")
-            }
-          }
-        }
-      }
-
-      public var asIncome: AsIncome? {
-        get {
-          if !AsIncome.possibleTypes.contains(__typename) { return nil }
-          return AsIncome(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsIncome: GraphQLSelectionSet {
-        public static let possibleTypes = ["Income"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("amount", type: .nonNull(.scalar(Double.self))),
-          GraphQLField("date", type: .nonNull(.scalar(String.self))),
-          GraphQLField("comment", type: .scalar(String.self)),
-          GraphQLField("account", type: .nonNull(.object(Account.selections))),
-          GraphQLField("place", type: .scalar(String.self)),
-          GraphQLField("category", type: .object(Category.selections)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: Account, place: String? = nil, category: Category? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Income", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap, "place": place, "category": category.flatMap { (value: Category) -> ResultMap in value.resultMap }])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var id: GraphQLID {
-          get {
-            return resultMap["id"]! as! GraphQLID
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "id")
-          }
-        }
-
-        public var amount: Double {
-          get {
-            return resultMap["amount"]! as! Double
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "amount")
-          }
-        }
-
-        public var date: String {
-          get {
-            return resultMap["date"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "date")
-          }
-        }
-
-        public var comment: String? {
-          get {
-            return resultMap["comment"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "comment")
-          }
-        }
-
-        public var account: Account {
-          get {
-            return Account(unsafeResultMap: resultMap["account"]! as! ResultMap)
-          }
-          set {
-            resultMap.updateValue(newValue.resultMap, forKey: "account")
-          }
-        }
-
-        public var place: String? {
-          get {
-            return resultMap["place"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "place")
-          }
-        }
-
-        public var category: Category? {
-          get {
-            return (resultMap["category"] as? ResultMap).flatMap { Category(unsafeResultMap: $0) }
-          }
-          set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "category")
-          }
-        }
-
-        public struct Account: GraphQLSelectionSet {
-          public static let possibleTypes = ["Account"]
-
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("balance", type: .nonNull(.scalar(Double.self))),
-          ]
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(name: String, balance: Double) {
-            self.init(unsafeResultMap: ["__typename": "Account", "name": name, "balance": balance])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var balance: Double {
-            get {
-              return resultMap["balance"]! as! Double
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "balance")
-            }
-          }
-        }
-
-        public struct Category: GraphQLSelectionSet {
-          public static let possibleTypes = ["IncomeCategory"]
-
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("public", type: .nonNull(.scalar(Bool.self))),
-          ]
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: GraphQLID, name: String, `public`: Bool) {
-            self.init(unsafeResultMap: ["__typename": "IncomeCategory", "id": id, "name": name, "public": `public`])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var id: GraphQLID {
-            get {
-              return resultMap["id"]! as! GraphQLID
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "id")
-            }
-          }
-
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var `public`: Bool {
-            get {
-              return resultMap["public"]! as! Bool
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "public")
-            }
-          }
-        }
-      }
-
-      public var asTransfer: AsTransfer? {
-        get {
-          if !AsTransfer.possibleTypes.contains(__typename) { return nil }
-          return AsTransfer(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsTransfer: GraphQLSelectionSet {
-        public static let possibleTypes = ["Transfer"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("amount", type: .nonNull(.scalar(Double.self))),
-          GraphQLField("date", type: .nonNull(.scalar(String.self))),
-          GraphQLField("comment", type: .scalar(String.self)),
-          GraphQLField("account", type: .nonNull(.object(Account.selections))),
-          GraphQLField("toAccount", type: .nonNull(.object(ToAccount.selections))),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(id: GraphQLID, amount: Double, date: String, comment: String? = nil, account: Account, toAccount: ToAccount) {
-          self.init(unsafeResultMap: ["__typename": "Transfer", "id": id, "amount": amount, "date": date, "comment": comment, "account": account.resultMap, "toAccount": toAccount.resultMap])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var id: GraphQLID {
-          get {
-            return resultMap["id"]! as! GraphQLID
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "id")
-          }
-        }
-
-        public var amount: Double {
-          get {
-            return resultMap["amount"]! as! Double
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "amount")
-          }
-        }
-
-        public var date: String {
-          get {
-            return resultMap["date"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "date")
-          }
-        }
-
-        public var comment: String? {
-          get {
-            return resultMap["comment"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "comment")
-          }
-        }
-
-        public var account: Account {
-          get {
-            return Account(unsafeResultMap: resultMap["account"]! as! ResultMap)
-          }
-          set {
-            resultMap.updateValue(newValue.resultMap, forKey: "account")
-          }
-        }
-
-        public var toAccount: ToAccount {
-          get {
-            return ToAccount(unsafeResultMap: resultMap["toAccount"]! as! ResultMap)
-          }
-          set {
-            resultMap.updateValue(newValue.resultMap, forKey: "toAccount")
-          }
-        }
-
-        public struct Account: GraphQLSelectionSet {
-          public static let possibleTypes = ["Account"]
-
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("balance", type: .nonNull(.scalar(Double.self))),
-          ]
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(name: String, balance: Double) {
-            self.init(unsafeResultMap: ["__typename": "Account", "name": name, "balance": balance])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var balance: Double {
-            get {
-              return resultMap["balance"]! as! Double
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "balance")
-            }
-          }
-        }
-
-        public struct ToAccount: GraphQLSelectionSet {
-          public static let possibleTypes = ["Account"]
-
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("balance", type: .nonNull(.scalar(Double.self))),
-          ]
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: GraphQLID, name: String, balance: Double) {
-            self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "balance": balance])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var id: GraphQLID {
-            get {
-              return resultMap["id"]! as! GraphQLID
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "id")
-            }
-          }
-
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var balance: Double {
-            get {
-              return resultMap["balance"]! as! Double
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "balance")
             }
           }
         }
